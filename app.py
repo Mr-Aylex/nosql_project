@@ -20,7 +20,15 @@ def main():  # put application's code here
     # render the template with the data
     return render_template('index.html', data=data)
 
+@app.route('/test')
+def test():
+    f = open('./owid-covid-data.json','r')
+    datas = json.load(f)
+    # for data in datas:
+    #     print(data)
 
+    return render_template('test.html', data=[datas])
 
+# FLASK_ENV="development"
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
