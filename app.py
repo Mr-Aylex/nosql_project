@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify ,render_template
 from pymongo import MongoClient
 import json
 
+from flask import jsonify
 #https://pymongo.readthedocs.io/en/stable/tutorial.html
 #https://matplotlib.org/
 
@@ -28,6 +29,34 @@ def test():
     #     print(data)
 
     return render_template('test.html', data=[datas])
+
+
+
+@app.route('/api',methods=['GET','PUT'])
+def api():
+
+    f = open('./owid-covid-data.json','r')
+    datas = json.load(f)
+
+    return_data = dict()
+    i = 0;
+    for data in datas:
+        return_data[i] = data
+        i = i+1
+
+    return jsonify(return_data)
+
+
+@app.route('/test2',methods=['GET','PUT'])
+def test2():
+    return render_template('test2.html')
+
+
+@app.route('/jsondata',methods=['GET','PUT'])
+def jsondata():
+    return render_template('testdata.geojson')
+
+
 
 # FLASK_ENV="development"
 if __name__ == '__main__':
