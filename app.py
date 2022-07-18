@@ -94,7 +94,10 @@ def test2():
 def jsondata():
     return render_template('testdata.geojson')
 
-
+@app.route('/displayceckbox')
+def test():
+    fields = ['champ1','champ2','champ3']
+    return render_template('ckb.html', data={'fields':fields})
 
 # FLASK_ENV="development"
 if __name__ == '__main__':
